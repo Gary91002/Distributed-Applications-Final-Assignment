@@ -26,6 +26,11 @@
         "Path": "API_Gateway\\API_Gateway.csproj",
         "Action": "Start",
         "DebugTarget": "https"
+      },
+      {
+        "Path": "Services\\G2Reservations.WebAPI\\G2Reservations.WebAPI.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
       }
     ]
   }
