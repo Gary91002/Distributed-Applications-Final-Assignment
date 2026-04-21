@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: carrental-mvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: carrental-mvc
+  template:
+    metadata:
+      labels:
+        app: carrental-mvc
+    spec:
+      containers:
+        - name: carrental-mvc
+          image: carrental-mvc:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://+:8080
+            - name: ApiGateway__BaseUrl
+              value: http://api-gateway:8080/
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sqlserver,1433;Database=CustomerProfile;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
