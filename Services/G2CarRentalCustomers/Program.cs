@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var serviceName = "G2Customers";
 var serviceVersion = "1.0.0";
-
+builder.Services.AddHealthChecks();
 builder.Logging.ClearProviders();
 builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
 builder.Logging.AddConsole();
@@ -81,5 +81,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHealthChecks("/health").AllowAnonymous();
 
 app.Run();

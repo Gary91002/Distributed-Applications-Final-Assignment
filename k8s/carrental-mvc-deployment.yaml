@@ -12,6 +12,17 @@ spec:
       labels:
         app: carrental-mvc
     spec:
+      initContainers:
+        - name: wait-for-infrastructure
+          image: busybox:1.36
+          command:
+            - 'sh'
+            - '-c'
+            - |
+              until nc -z sqlserver 1433 && nc -z api-gateway 8080; do 
+                echo "Waiting for SQL Server and API Gateway..."; 
+                sleep 2; 
+              done;
       containers:
         - name: carrental-mvc
           image: distributed-applications-final-assignment-carrental-mvc:latest
@@ -34,4 +45,19 @@ spec:
               value: http://api-gateway:8080/
             - name: ConnectionStrings__DefaultConnection
               value: "Server=sqlserver,1433;Database=CustomerProfile;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
-              
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3

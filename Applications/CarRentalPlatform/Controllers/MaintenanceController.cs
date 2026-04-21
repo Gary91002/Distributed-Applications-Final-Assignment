@@ -49,7 +49,7 @@ namespace CarRentalPlatform.Controllers
 			}
 
 			var client = _httpClientFactory.CreateClient("MaintenanceApi");
-			var response = await client.PostAsJsonAsync("api/maintenance", model);
+			var response = await client.PostAsJsonAsync("api/maintenance/", model);
 
 			if (response.IsSuccessStatusCode)
 			{

@@ -24,7 +24,7 @@ namespace CarRentalPlatform.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var client = GetClient();
-			var customers = await client.GetFromJsonAsync<List<G2Customer>>("api/G2CustomersApi");
+			var customers = await client.GetFromJsonAsync<List<G2Customer>>("api/G2CustomersApi/");
 			return View(customers ?? new List<G2Customer>());
 		}
 
@@ -55,7 +55,7 @@ namespace CarRentalPlatform.Controllers
 			if (ModelState.IsValid)
 			{
 				var client = GetClient();
-				var response = await client.PostAsJsonAsync("api/G2CustomersApi", g2Customer);
+				var response = await client.PostAsJsonAsync("api/G2CustomersApi/", g2Customer);
 
 				if (response.IsSuccessStatusCode)
 					return RedirectToAction(nameof(Index));

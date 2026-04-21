@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var serviceName = "G2VehicleInventory";
 var serviceVersion = "1.0.0";
-
+builder.Services.AddHealthChecks();
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddOpenTelemetry(options =>
@@ -96,7 +96,7 @@ using (var scope = app.Services.CreateScope())
         db.Database.EnsureCreated();
     }
 }
-
+app.MapHealthChecks("/health").AllowAnonymous();
 app.Run();
 
 public partial class Program { }

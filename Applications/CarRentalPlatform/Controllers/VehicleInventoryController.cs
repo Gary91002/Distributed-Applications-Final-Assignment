@@ -19,7 +19,7 @@ namespace CarRentalPlatform.Controllers
 		public async Task<IActionResult> Index()
 		{
 			var client = GetClient();
-			var vehicles = await client.GetFromJsonAsync<List<VehicleViewModel>>("api/G2Vehicles");
+			var vehicles = await client.GetFromJsonAsync<List<VehicleViewModel>>("api/G2Vehicles/");
 			return View(vehicles ?? new List<VehicleViewModel>());
 		}
 
@@ -48,7 +48,7 @@ namespace CarRentalPlatform.Controllers
 			}
 
 			var client = GetClient();
-			var response = await client.PostAsJsonAsync("api/G2Vehicles", model);
+			var response = await client.PostAsJsonAsync("api/G2Vehicles/", model);
 
 			if (response.IsSuccessStatusCode)
 			{

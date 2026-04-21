@@ -17,6 +17,12 @@ namespace G2_Shared_Infrastructure
 
 		public async Task InvokeAsync(HttpContext context)
 		{
+			if (context.Request.Path.StartsWithSegments("/health"))
+			{
+				await _next(context);
+				return;
+			}
+			
 			if (!context.Request.Headers.TryGetValue("X-From-Gateway", out var secret) ||
 				secret != "GS-Gateway-Trusted-Token-111")
 			{

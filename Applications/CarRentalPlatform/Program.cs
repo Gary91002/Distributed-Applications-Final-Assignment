@@ -2,10 +2,10 @@ using CarRentalPlatform.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHealthChecks();
 // 1. Get values from appsettings.json
 var gatewayUrl = builder.Configuration["ApiGateway:BaseUrl"]!;
-const string gatewayKey = "GS-Secret-Key-2111"; // Must match your Gateway's expected key
+const string gatewayKey = "GS-Secret-Key-2111"; // Must match the Gateway's expected key
 
 // 2. Register the "ApiGateway" client used by your Controllers
 builder.Services.AddHttpClient("ApiGateway", client =>
@@ -49,5 +49,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.MapHealthChecks("/health").AllowAnonymous();
 app.Run();

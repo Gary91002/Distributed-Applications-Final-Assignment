@@ -7,7 +7,7 @@ using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHealthChecks();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 var serviceName = "G2Reservations";
 var serviceVersion = "1.0.0";
 
-builder.Logging.ClearProviders();
+/*builder.Logging.ClearProviders();
 builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
 builder.Logging.AddConsole();
 builder.Logging.AddOpenTelemetry(options =>
@@ -49,7 +49,7 @@ builder.Services.AddOpenTelemetry()
 			.AddAspNetCoreInstrumentation()
 			.AddHttpClientInstrumentation()
 			.AddConsoleExporter();
-	});
+	});*/
 
 builder.Services.AddDbContext<G2ReservationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -79,13 +79,13 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-using (var scope = app.Services.CreateScope())
+/*using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<G2ReservationDbContext>();
 	db.Database.EnsureCreated();
-}
+}*/
 
 app.UseAuthorization();
 app.MapControllers();
-
+app.MapHealthChecks("/health").AllowAnonymous();
 app.Run();

@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 var serviceName = "G2ApiGateway";
 var serviceVersion = "1.0.0";
 
+builder.Services.AddHealthChecks();
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.AddOpenTelemetry(options =>
@@ -64,6 +65,11 @@ var app = builder.Build();
 // Security Middleware
 app.Use(async (context, next) =>
 {
+	if (context.Request.Path.StartsWithSegments("/health"))
+	{
+		await next();
+		return;
+	}
 	const string API_KEY_HEADER = "X-GS-Api-Key";
 	const string EXPECTED_API_KEY = "GS-Secret-Key-2111"; // MVC sends this
 
@@ -95,5 +101,5 @@ app.MapReverseProxy();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHealthChecks("/health").AllowAnonymous();
 app.Run();

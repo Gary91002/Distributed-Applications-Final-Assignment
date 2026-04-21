@@ -53,7 +53,7 @@ namespace CarRentalPlatform.Controllers
 
 			var client = GetClient();
 
-			var response = await client.PostAsJsonAsync("api/G2Reservations", model.Reservation);
+			var response = await client.PostAsJsonAsync("api/G2Reservations/", model.Reservation);
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -91,8 +91,8 @@ namespace CarRentalPlatform.Controllers
 		{
 			var client = GetClient();
 
-			var customers = await client.GetFromJsonAsync<List<G2Customer>>("api/G2CustomersApi") ?? new List<G2Customer>();
-			var vehicles = await client.GetFromJsonAsync<List<VehicleViewModel>>("api/G2Vehicles") ?? new List<VehicleViewModel>();
+			var customers = await client.GetFromJsonAsync<List<G2Customer>>("api/G2CustomersApi/") ?? new List<G2Customer>();
+			var vehicles = await client.GetFromJsonAsync<List<VehicleViewModel>>("api/G2Vehicles/") ?? new List<VehicleViewModel>();
 
 			model.Customers = customers
 				.Select(c => new SelectListItem
