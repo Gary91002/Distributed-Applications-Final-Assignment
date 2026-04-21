@@ -23,6 +23,21 @@ services:
     ports:
       - "7058:8080"
 
+  reservations-api:
+    build:
+      context: .
+      dockerfile: Services/G2Reservations.WebAPI/Dockerfile
+    container_name: reservations-api
+    depends_on:
+      - sqlserver
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=G2ReservationsDb;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
+      ServiceUrls__CustomersApi: "http://customers-api:8080/"
+      ServiceUrls__VehicleInventoryApi: "http://vehicleinventory-api:8080/"
+    ports:
+      - "7200:8080"
+
   maintenance-api:
     build:
       context: .

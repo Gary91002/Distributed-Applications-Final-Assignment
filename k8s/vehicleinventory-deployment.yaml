@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vehicleinventory-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vehicleinventory-api
+  template:
+    metadata:
+      labels:
+        app: vehicleinventory-api
+    spec:
+      containers:
+        - name: vehicleinventory-api
+          image: vehicleinventory-api:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://+:8080
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sqlserver,1433;Database=VehicleInventory;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"

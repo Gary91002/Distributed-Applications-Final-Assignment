@@ -25,3 +25,9 @@ spec:
               value: http://+:8080
             - name: ReverseProxy__Clusters__maintenance-cluster__Destinations__destination1__Address
               value: http://maintenance-api:8080
+            - name: ReverseProxy__Clusters__car-rental-customer-cluster__Destinations__destination1__Address
+              value: http://customers-api:8080
+            - name: ReverseProxy__Clusters__vehicleinventory-cluster__Destinations__destination1__Address
+              value: http://vehicleinventory-api:8080
+            - name: ReverseProxy__Clusters__reservations-cluster__Destinations__destination1__Address
+              value: http://reservations-api:8080

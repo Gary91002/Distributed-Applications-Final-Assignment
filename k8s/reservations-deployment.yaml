@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reservations-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: reservations-api
+  template:
+    metadata:
+      labels:
+        app: reservations-api
+    spec:
+      containers:
+        - name: reservations-api
+          image: reservations-api:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Development
+            - name: ASPNETCORE_URLS
+              value: http://+:8080
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sqlserver,1433;Database=G2ReservationsDb;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
+            - name: ServiceUrls__CustomersApi
+              value: http://customers-api:8080/
+            - name: ServiceUrls__VehicleInventoryApi
+              value: http://vehicleinventory-api:8080/
