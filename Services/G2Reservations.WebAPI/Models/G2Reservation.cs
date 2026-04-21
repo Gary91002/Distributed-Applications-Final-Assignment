@@ -16,12 +16,15 @@ namespace G2Reservations.WebAPI.Models
 		public int VehicleId { get; set; }
 
 		[Required]
+		[DataType(DataType.DateTime)]
 		public DateTime CreatedDate { get; set; }
 
 		[Required]
+		[DataType(DataType.DateTime)]
 		public DateTime StartDate { get; set; }
 
 		[Required]
+		[DataType(DataType.DateTime)]
 		public DateTime EndDate { get; set; }
 	}
 }

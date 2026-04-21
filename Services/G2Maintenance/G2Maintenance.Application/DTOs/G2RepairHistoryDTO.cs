@@ -1,11 +1,15 @@
-﻿namespace G2Maintenance.Application.DTOs;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace G2Maintenance.Application.DTOs;
 
 public class G2RepairHistoryDTO
 {
-    public int Id { get;  set; }
-    public int VehicleId { get;  set; }
-    public DateTime RepairDate { get;  set; }
-    public string Description { get;  set; } = string.Empty;
-    public decimal Cost { get;  set; }
-    public string PerformedBy { get;  set; } = string.Empty;
+	[Required]
+	public int Id { get; set; }
+	[Required]
+	public int VehicleId { get; set; }
+	public DateTime RepairDate { get; set; }
+	public string Description { get; set; } = string.Empty;
+	public decimal Cost { get; set; }
+	public string PerformedBy { get; set; } = string.Empty;
 }
