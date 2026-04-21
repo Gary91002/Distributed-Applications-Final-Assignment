@@ -1,0 +1,32 @@
+name: CarRental Build and Test
+
+on:
+  push:
+    branches:
+      - main
+      - feature/Testing
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Restore dependencies
+        run: dotnet restore CarRental.sln
+
+      - name: Build with dotnet
+        run: dotnet build CarRental.sln --configuration Release --no-restore
+
+      - name: Run unit and integration tests
+        run: dotnet test CarRental.sln --configuration Release --no-build --verbosity normal
