@@ -16,6 +16,13 @@ spec:
         - name: sqlserver
           image: mcr.microsoft.com/mssql/server:2022-latest
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "2Gi"
+            limits:
+              cpu: "2000m"
+              memory: "4Gi"
           ports:
             - containerPort: 1433
           env:
@@ -23,10 +30,4 @@ spec:
               value: "Y"
             - name: MSSQL_SA_PASSWORD
               value: "Password111!"
-              resources:
-                requests:
-                  cpu: "150m"
-                  memory: "256Mi"
-                limits:
-                  cpu: "400m"
-                  memory: "512Mi"
+              
