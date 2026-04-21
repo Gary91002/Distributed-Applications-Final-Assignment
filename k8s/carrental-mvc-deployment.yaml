@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: carrental-mvc
-          image: carrental-mvc:local
-          imagePullPolicy: Never
+          image: distributed-applications-final-assignment-carrental-mvc:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:

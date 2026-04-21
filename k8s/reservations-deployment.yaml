@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: reservations-api
-          image: reservations-api:local
-          imagePullPolicy: Never
+          image: distributed-applications-final-assignment-reservations-api:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:

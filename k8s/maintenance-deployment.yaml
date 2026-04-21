@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: maintenance-api
-          image: maintenance-api:local
-          imagePullPolicy: Never
+          image: distributed-applications-final-assignment-maintenance-api:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:
@@ -23,3 +23,5 @@ spec:
               value: Development
             - name: ASPNETCORE_URLS
               value: http://+:8080
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sqlserver,1433;Database=MaintenanceDb;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
