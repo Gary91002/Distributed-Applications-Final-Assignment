@@ -1,5 +1,4 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36930.0
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -40,6 +39,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2Maintenance.Infrastructure", "Services\G2Maintenance\G2Maintenance.Infrastructure\G2Maintenance.Infrastructure.csproj", "{A571C0E3-6629-44D5-8BC3-0B95D7332DD8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2Maintenance.WebAPI", "Services\G2Maintenance\G2Maintenance.WebAPI\G2Maintenance.WebAPI.csproj", "{FB37A264-04C1-4086-9B91-BD36F806A3C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{BEEF2E34-A214-4ECF-AE1C-755F0374C090}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2VehicleInventory.Domain.Tests", "Tests\G2VehicleInventory.Domain.Tests\G2VehicleInventory.Domain.Tests.csproj", "{6B895D0F-F5B8-4F17-ADC2-8BEC75CEF379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "G2VehicleInventory.WebAPI.IntegrationTests", "Tests\G2VehicleInventory.WebAPI.IntegrationTests\G2VehicleInventory.WebAPI.IntegrationTests.csproj", "{6A50B231-78CD-4144-91FC-C62F7C9439F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +108,14 @@ Global
 		{FB37A264-04C1-4086-9B91-BD36F806A3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB37A264-04C1-4086-9B91-BD36F806A3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB37A264-04C1-4086-9B91-BD36F806A3C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B895D0F-F5B8-4F17-ADC2-8BEC75CEF379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B895D0F-F5B8-4F17-ADC2-8BEC75CEF379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B895D0F-F5B8-4F17-ADC2-8BEC75CEF379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B895D0F-F5B8-4F17-ADC2-8BEC75CEF379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A50B231-78CD-4144-91FC-C62F7C9439F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A50B231-78CD-4144-91FC-C62F7C9439F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A50B231-78CD-4144-91FC-C62F7C9439F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A50B231-78CD-4144-91FC-C62F7C9439F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +133,6 @@ Global
 		{94EFEEE2-7B42-4F22-8618-9FF7B897485D} = {DA374289-26B1-4DF7-BD1D-A6E9E398AA89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-									SolutionGuid = {1FC7839A-F367-441C-83FB-C5DD065B13AC}
+		SolutionGuid = {1FC7839A-F367-441C-83FB-C5DD065B13AC}
 	EndGlobalSection
 EndGlobal
