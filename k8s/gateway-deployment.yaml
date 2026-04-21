@@ -16,6 +16,13 @@ spec:
         - name: api-gateway
           image: distributed-applications-final-assignment-api-gateway:latest
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "150m"
+              memory: "256Mi"
+            limits:
+              cpu: "400m"
+              memory: "1Gi"
           ports:
             - containerPort: 8080
           env:
@@ -31,10 +38,4 @@ spec:
               value: http://vehicleinventory-api:8080
             - name: ReverseProxy__Clusters__reservations-cluster__Destinations__destination1__Address
               value: http://reservations-api:8080
-              resources:
-                requests:
-                  cpu: "150m"
-                  memory: "256Mi"
-                limits:
-                  cpu: "400m"
-                  memory: "512Mi"
+              

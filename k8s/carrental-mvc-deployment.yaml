@@ -16,6 +16,13 @@ spec:
         - name: carrental-mvc
           image: distributed-applications-final-assignment-carrental-mvc:latest
           imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: "150m"
+              memory: "256Mi"
+            limits:
+              cpu: "400m"
+              memory: "1Gi"
           ports:
             - containerPort: 8080
           env:
@@ -27,10 +34,4 @@ spec:
               value: http://api-gateway:8080/
             - name: ConnectionStrings__DefaultConnection
               value: "Server=sqlserver,1433;Database=CustomerProfile;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
-              resources:
-                requests:
-                  cpu: "150m"
-                  memory: "256Mi"
-                limits:
-                  cpu: "400m"
-                  memory: "512Mi"
+              
