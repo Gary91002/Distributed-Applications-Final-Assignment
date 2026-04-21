@@ -1,25 +1,12 @@
 services:
-  sqlserver:
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    container_name: sqlserver
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Password111!"
-    ports:
-      - "1433:1433"
-    volumes:
-      - sqlserver_data:/var/opt/mssql
-
   customers-api:
     build:
       context: .
       dockerfile: Services/G2CarRentalCustomers/Dockerfile
     container_name: customers-api
-    depends_on:
-      - sqlserver
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=CustomerProfile;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
+      ConnectionStrings__DefaultConnection: "Data Source=customers.db"
     ports:
       - "7058:8080"
 
@@ -28,11 +15,9 @@ services:
       context: .
       dockerfile: Services/G2Maintenance/G2Maintenance.WebAPI/Dockerfile
     container_name: maintenance-api
-    depends_on:
-      - sqlserver
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=MaintenanceDb;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
+      ConnectionStrings__DefaultConnection: "Data Source=maintenance.db"
     ports:
       - "7123:8080"
 
@@ -41,11 +26,9 @@ services:
       context: .
       dockerfile: Services/G2VehicleInventory/G2VehicleInventory.WebAPI/Dockerfile
     container_name: vehicleinventory-api
-    depends_on:
-      - sqlserver
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=VehicleInventory;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
+      ConnectionStrings__DefaultConnection: "Data Source=vehicleinventory.db"
     ports:
       - "7182:8080"
 
@@ -73,13 +56,9 @@ services:
     container_name: carrental-mvc
     depends_on:
       - api-gateway
-      - sqlserver
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ApiGateway__BaseUrl: "http://api-gateway:8080/"
-      ConnectionStrings__DefaultConnection: "Server=sqlserver,1433;Database=CustomerProfile;User Id=sa;Password=Password111!;TrustServerCertificate=True;Encrypt=False"
+      ConnectionStrings__DefaultConnection: "Data Source=customers.db"
     ports:
       - "7045:8080"
-
-volumes:
-  sqlserver_data:
