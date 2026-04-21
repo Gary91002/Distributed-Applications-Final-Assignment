@@ -8,7 +8,7 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services/G2Reservations.WebAPI/G2Reservations.WebAPI.csproj", "Services/G2Reservations.WebAPI/"]
-COPY ["Shared/GS_Shared_Infrastructure/GS_Shared_Infrastructure.csproj", "Shared/GS_Shared_Infrastructure/"]
+COPY ["Shared/G2_Shared_Infrastructure/G2_Shared_Infrastructure.csproj", "Shared/G2_Shared_Infrastructure/"]
 RUN dotnet restore "./Services/G2Reservations.WebAPI/G2Reservations.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/Services/G2Reservations.WebAPI"
