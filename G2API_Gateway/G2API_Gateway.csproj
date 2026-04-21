@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Shared\G2_Shared_Infrastructure\G2_Shared_Infrastructure.csproj" />
   </ItemGroup>
 
