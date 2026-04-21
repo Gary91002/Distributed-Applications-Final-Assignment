@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: customers-api
-          image: customers-api:local
-          imagePullPolicy: Never
+          image: distributed-applications-final-assignment-customers-api:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:

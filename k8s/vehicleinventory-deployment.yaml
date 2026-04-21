@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: vehicleinventory-api
-          image: vehicleinventory-api:local
-          imagePullPolicy: Never
+          image: distributed-applications-final-assignment-vehicleinventory-api:latest
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           env:
