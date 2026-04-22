@@ -29,6 +29,7 @@ namespace G2Reservations.WebAPI.Models
 		{
 			modelBuilder.Entity<G2Reservation>(entity =>
 			{
+				entity.ToTable("Reservations");
 				entity.HasKey(e => e.Id);
 			});
 

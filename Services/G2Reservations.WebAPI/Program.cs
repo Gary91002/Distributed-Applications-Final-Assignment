@@ -79,11 +79,19 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();
 
-/*using (var scope = app.Services.CreateScope())
+using (var scope = app.Services.CreateScope())
 {
 	var db = scope.ServiceProvider.GetRequiredService<G2ReservationDbContext>();
-	db.Database.EnsureCreated();
-}*/
+
+	if (db.Database.IsRelational())
+	{
+		db.Database.Migrate();
+	}
+	else
+	{
+		db.Database.EnsureCreated();
+	}
+}
 
 app.UseAuthorization();
 app.MapControllers();

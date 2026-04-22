@@ -79,19 +79,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-for (int i = 0; i < 5; i++)
+using (var scope = app.Services.CreateScope())
 {
-    try
+    var db = scope.ServiceProvider.GetRequiredService<G2MaintenanceDbContext>();
+
+    if (db.Database.IsRelational())
     {
-        using var scope = app.Services.CreateScope();
-        var db = scope.ServiceProvider.GetRequiredService<G2MaintenanceDbContext>();
         db.Database.Migrate();
-        break;
     }
-    catch (Exception ex)
+    else
     {
-        Console.WriteLine($"Migration attempt {i} failed: {ex.Message}");
-        Thread.Sleep(5000); 
+        db.Database.EnsureCreated();
     }
 }
 

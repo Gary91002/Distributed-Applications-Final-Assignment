@@ -13,16 +13,24 @@ spec:
         app: customers-api
     spec:
       initContainers:
-        - name: wait-for-sqlserver
-          image: busybox:1.36
+        - name: init-db-and-wait
+          image: mcr.microsoft.com/mssql/server:2022-latest
+          env:
+            - name: SA_PASSWORD
+              value: "Password111!"
           command:
             - 'sh'
             - '-c'
             - |
-              until nc -z sqlserver 1433; do 
-                echo "Waiting for SQL Server to accept connections..."; 
-                sleep 2; 
-              done;
+              # Loop until the engine accepts a basic query
+              # -C is used here because your deployment isn't using trusted certs yet
+              until /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -C -Q "SELECT 1" > /dev/null 2>&1; do
+                echo "Waiting for SQL Server engine to be fully queryable..."
+                sleep 2
+              done
+              
+              echo "SQL Server is up. Ensuring MaintenanceDb exists..."
+              /opt/mssql-tools18/bin/sqlcmd -S sqlserver -U sa -P "$SA_PASSWORD" -C -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'CustomerProfile') CREATE DATABASE CustomerProfile"
       containers:
         - name: customers-api
           image: distributed-applications-final-assignment-customers-api:latest
