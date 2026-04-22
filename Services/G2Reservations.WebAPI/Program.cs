@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();
 var serviceName = "G2Reservations";
 var serviceVersion = "1.0.0";
 
-/*builder.Logging.ClearProviders();
+builder.Logging.ClearProviders();
 builder.Logging.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
 builder.Logging.AddConsole();
 builder.Logging.AddOpenTelemetry(options =>
@@ -49,7 +49,7 @@ builder.Services.AddOpenTelemetry()
 			.AddAspNetCoreInstrumentation()
 			.AddHttpClientInstrumentation()
 			.AddConsoleExporter();
-	});*/
+	});
 
 builder.Services.AddDbContext<G2ReservationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
